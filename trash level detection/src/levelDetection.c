@@ -13,3 +13,28 @@
  * Red = >90%.
  *
 **********************************/
+#include <stdlib.h>
+#include <stdio.h>
+#include <pigpio.h>
+#include <unistd.h>
+
+int main() {
+
+
+    printf("Flickering LED\n");
+    if (gpioInitialise() < 0) {
+        exit(EXIT_FAILURE);
+    }
+    gpioSetMode(26, PI_OUTPUT);
+    for(;;) {
+	time_sleep(1);
+        gpioWrite(26,0);
+	time_sleep(1);
+	gpioWrite(26,1);
+    }
+
+
+
+
+    return EXIT_SUCCESS;
+}
