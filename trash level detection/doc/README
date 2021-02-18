@@ -1,0 +1,7 @@
+Team 7 
+Trash level detection
+
+This directory contains the source code for the trash level detection for our automatic 
+sorting trash can. This module makes uses of the pigpio library and the HR-S04 ultrasonic
+sensor for detecting the level of trash in each compartment.
+
