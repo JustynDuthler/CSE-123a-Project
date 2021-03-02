@@ -18,6 +18,8 @@
 #include <pigpio.h>
 #include <unistd.h>
 #include <sys/time.h>
+#include "levelDetection.h"
+
 int main() 
 {
     if (initSensors() == 0) {
@@ -43,6 +45,7 @@ int initSensors(void)
     gpioSetMode(20, PI_INPUT);  // Echo
     // settle trigger pin
     gpioWrite(21, 0);
+    return 1;
 }
 
 int calculateDistance(int trigPin, int echoPin)
@@ -61,8 +64,8 @@ int calculateDistance(int trigPin, int echoPin)
         gettimeofday(&stopTime, NULL);
     }
     // convert time to microseconds;
-    long startTimeM = (startTime.tv_sec + startTime.tv_usec) * 1000000;
-    long stopTimeM = (stopTime.tv_sec + stopTime.tv_usec) * 1000000;
+    long startTimeM = (startTime.tv_sec * 1000000)  + startTime.tv_usec;
+    long stopTimeM = (stopTime.tv_sec * 1000000) + stopTime.tv_usec;
     long timeDiff = stopTimeM - startTimeM;
     int distance = timeDiff / 58;
     return distance;
