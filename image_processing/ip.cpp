@@ -48,7 +48,7 @@ int main(int argc, char** argv)
     ModelWrapper wrapper;
 
     // Open the video camera. To use a different camera, change the camera index.
-    cv::VideoCapture camera(0);
+    //cv::VideoCapture camera(0);
 
     // Read the category names
     auto categories = ReadLinesFromFile("categories.txt");
@@ -57,7 +57,7 @@ int main(int argc, char** argv)
     TensorShape inputShape = wrapper.GetInputShape();
 
     // Get the model's preprocessing metadata. We will use this information later to preprocess images
-    tutorialHelpers::ImagePreprocessingMetadata metadata = tutorialHelpers::GetImagePreprocessingMetadata(wrapper);
+    iph::ImagePreprocessingMetadata metadata = iph::GetImagePreprocessingMetadata(wrapper);
 
     // Create a vector to hold the model's output predictions
     std::vector<float> predictions(wrapper.GetOutputSize());
@@ -69,13 +69,14 @@ int main(int argc, char** argv)
     while ((cv::waitKey(1) & 0xFF) != 27)
     {
         // Get an image from the camera. (Alternatively, call GetImageFromFile to read from file)
-        cv::Mat image = GetImageFromCamera(camera);
+        //cv::Mat image = GetImageFromCamera(camera);
+        cv::Mat image = GetImageFromFile(argv[1]);
 
         // Prepare an image for processing
         // - Resize and center-crop to the required width and height while preserving aspect ratio.
         // - OpenCV gives the image in BGR order. If needed, re-order the channels to RGB.
         // - Convert the OpenCV result to a std::vector<float>
-        auto input = tutorialHelpers::PrepareImageForModel(image, inputShape.columns, inputShape.rows, &metadata);
+        auto input = iph::PrepareImageForModel(image, inputShape.columns, inputShape.rows, &metadata);
 
         // Send the image to the compiled model and fill the predictions vector with scores, measure how long it takes
         auto start = std::chrono::steady_clock::now();
@@ -83,7 +84,7 @@ int main(int argc, char** argv)
         auto end = std::chrono::steady_clock::now();
 
         // Get the value of the top 5 predictions
-        auto top5 = tutorialHelpers::GetTopN(predictions, 5);
+        auto top5 = iph::GetTopN(predictions, 5);
 
         // Generate header text that represents the top5 predictions
         std::stringstream headerText;
@@ -91,13 +92,13 @@ int main(int argc, char** argv)
         {
             headerText << "(" << std::floor(element.second * 100.0) << "%) " << categories[element.first] << "  ";
         }
-        tutorialHelpers::DrawHeader(image, headerText.str());
+        iph::DrawHeader(image, headerText.str());
 
         // Generate footer text that represents the mean evaluation time
         std::stringstream footerText;
-        meanTimeToPredict = std::floor(tutorialHelpers::GetMeanDuration(predictionTimes, std::chrono::duration<double>(end - start).count()) * 1000);
+        meanTimeToPredict = std::floor(iph::GetMeanDuration(predictionTimes, std::chrono::duration<double>(end - start).count()) * 1000);
         footerText << meanTimeToPredict << "ms/frame";
-        tutorialHelpers::DrawFooter(image, footerText.str());
+        iph::DrawFooter(image, footerText.str());
 
         // Display the image
         cv::imshow("ELL model", image);
