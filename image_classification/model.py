@@ -82,7 +82,7 @@ base_model.summary()
 global_average_layer = tf.keras.layers.GlobalAveragePooling2D()
 feature_batch_average = global_average_layer(feature_batch)
 
-prediction_layer = tf.keras.layers.Dense(num_classes)
+prediction_layer = tf.keras.layers.Dense(num_classes, activation = "softmax")
 prediction_batch = prediction_layer(feature_batch_average)
 
 inputs = tf.keras.Input(shape=(160, 160, 3))
