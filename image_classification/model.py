@@ -54,7 +54,7 @@ train_dataset = train_dataset.cache().shuffle(1000).prefetch(buffer_size=AUTOTUN
 validation_dataset = validation_dataset.cache().prefetch(buffer_size=AUTOTUNE)
 
 # process pixel values to fall within -1, 1 range
-preprocess_input = tf.keras.applications.mobilenet_v2.preprocess_input
+preprocess_input = tf.keras.applications.resnet_v2.preprocess_input
 
 # define number of classes
 num_classes = 3
@@ -135,44 +135,4 @@ plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
 plt.show()
 
-# basic can test
-can_path = Path('/home/justynduthler/Desktop/CSE-123a-Project/image_classification/can.jpg')
-img = tf.keras.preprocessing.image.load_img(can_path, target_size=(160, 160))
-img_array = tf.keras.preprocessing.image.img_to_array(img)
-img_array = tf.expand_dims(img_array, 0) # Create a batch
-
-predictions = model.predict(img_array)
-score = tf.nn.softmax(predictions[0])
-
-print(
-    "This can image most likely belongs to {} with a {:.2f} percent confidence."
-    .format(class_names[np.argmax(score)], 100 * np.max(score))
-) 
-
-# basic bag test
-bag_path = Path('/home/justynduthler/Desktop/CSE-123a-Project/image_classification/bag.jpg')
-img = tf.keras.preprocessing.image.load_img(bag_path, target_size=(160, 160))
-img_array = tf.keras.preprocessing.image.img_to_array(img)
-img_array = tf.expand_dims(img_array, 0) # Create a batch
-
-predictions = model.predict(img_array)
-score = tf.nn.softmax(predictions[0])
-
-print(
-    "This bag image most likely belongs to {} with a {:.2f} percent confidence."
-    .format(class_names[np.argmax(score)], 100 * np.max(score))
-) 
-
-# basic banana peel test
-ban_path = Path('/home/justynduthler/Desktop/CSE-123a-Project/image_classification/ban.jpg')
-img = tf.keras.preprocessing.image.load_img(ban_path, target_size=(160, 160))
-img_array = tf.keras.preprocessing.image.img_to_array(img)
-img_array = tf.expand_dims(img_array, 0) # Create a batch
-
-predictions = model.predict(img_array)
-score = tf.nn.softmax(predictions[0])
-
-print(
-    "This banana image most likely belongs to {} with a {:.2f} percent confidence."
-    .format(class_names[np.argmax(score)], 100 * np.max(score))
-) 
+model.save('saved-model/model')
