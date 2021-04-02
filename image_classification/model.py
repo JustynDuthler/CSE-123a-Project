@@ -9,17 +9,87 @@ import numpy as np
 import os
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image_dataset_from_directory
+import tensorflow_hub as hub
+import cv2
+from tensorflow import keras
+from tensorflow.keras import layers
+from tensorflow.keras.models import Sequential
 
 # path to dataset and printing out number of images
 data_dir = Path('/home/justynduthler/Desktop/CSE-123a-Project/image_classification/compostnet-dataset-resized')
-PATH = os.path.join(os.path.dirname(data_dir), 'compostnet-dataset-resized')
 image_count = len(list(data_dir.glob('*/*.jpg')))
 print(image_count)
 
+dataset_dict = {
+  'cardboard': list(data_dir.glob('cardboard/*')),
+  'compost': list(data_dir.glob('compost/*')),
+  'glass' : list(data_dir.glob('glass/*')),
+  'metal' : list(data_dir.glob('metal/*')),
+  'paper' : list(data_dir.glob('paper/*')),
+  'plastic': list(data_dir.glob('plastic/*')),
+  'trash': list(data_dir.glob('trash/*')),
+}
+
+dataset_labels_dict = {
+  'cardboard': 0,
+  'compost': 1,
+  'glass' : 2,
+  'metal' : 3,
+  'paper' : 4,
+  'plastic': 5,
+  'trash': 6,
+}
+
+print(dataset_dict['cardboard'][:5])
 # define batch size and image dimensions for training
 batch_size = 32
-img_size = (160, 160)
+img_size = (224, 224)
 
+X, y = [], []
+
+for trash_name, images in dataset_dict.items():
+    for image in images:
+        img = cv2.imread(str(image))
+        resized_img = cv2.resize(img,(224,224))
+        X.append(resized_img)
+        y.append(dataset_labels_dict[trash_name])
+
+X = np.array(X)
+y = np.array(y)
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+
+X_train_scaled = X_train / 255
+X_test_scaled = X_test / 255
+
+feature_extractor_model = "https://tfhub.dev/google/tf2-preview/mobilenet_v2/feature_vector/4"
+
+pretrained_model_without_top_layer = hub.KerasLayer(
+    feature_extractor_model, input_shape=(224, 224, 3), trainable=False)
+
+num_of_classes = 7
+
+model = tf.keras.Sequential([
+  pretrained_model_without_top_layer,
+  tf.keras.layers.Dense(num_of_classes)
+])
+
+model.summary()
+
+model.compile(
+  optimizer="adam",
+  loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+  metrics=['acc'])
+
+model.fit(X_train_scaled, y_train, epochs=8)
+
+model.evaluate(X_test_scaled,y_test)
+
+model.save('saved-model/model')
+
+'''
 # create training and validation sets from complete dataset
 # create training and validation sets from complete dataset
 train_dataset = tf.keras.preprocessing.image_dataset_from_directory(
@@ -136,3 +206,4 @@ plt.title('Training and Validation Loss')
 plt.show()
 
 model.save('saved-model/model')
+'''
