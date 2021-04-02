@@ -31,6 +31,14 @@ int main(int argc, char** argv)
 
         // Display the image
         cv::imshow("SimpleSort", image);
+
+
+        ////// call model ///////
+
+
+
+
+        ////////////////////////
     }
 
 
