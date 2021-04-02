@@ -20,13 +20,13 @@ static cv::Mat GetImageFromFile(const std::string& filename)
 
 int main(int argc, char** argv)
 {
-
+	cv::VideoCapture camera(0);
 
 	while ((cv::waitKey(1) & 0xFF) != 27)
     {
         // Get an image from the camera. (Alternatively, call GetImageFromFile to read from file)
         //cv::Mat image = GetImageFromCamera(camera);
-        cv::Mat image = GetImageFromFile(argv[1]);
+        cv::Mat image = GetImageFromCamera(camera);
 
 
         // Display the image
