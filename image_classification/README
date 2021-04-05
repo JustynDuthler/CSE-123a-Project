@@ -1,0 +1,12 @@
+Team 7
+image_classification
+
+This directory contains the image classification model used to determine type
+of trash
+
+To run:
+Download tensor flow 2.4.1 using '$pip3 install --upgrade tensorflow' inside of a virtual environment (venv).
+Download any of the missing imports from model.py using the same pip install inside of the same virtual environment.
+Then edit the directory path to fit your machine for the compost net data set and the image test at the end.
+Once all of the libraries are install you can run '$python3 model.py'.
+
