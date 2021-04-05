@@ -1,12 +1,4 @@
-#!/usr/bin/env python3
-###############################################################################
-#
-#  Project:  Embedded Learning Library (ELL)
-#  File:     tutorial.py
-#  Authors:  Byron Changuion
-#
-#  Requires: Python 3.x
-#
+
 ###############################################################################
 
 import time
