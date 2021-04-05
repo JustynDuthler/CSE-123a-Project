@@ -20,16 +20,25 @@
 #include <sys/time.h>
 #include "levelDetection.h"
 
+#define trigger     21
+#define sensor1Echo 20
+#define sensor2Echo 16
+#define sensor3Echo 26
+
 int main() 
 {
     if (initSensors() == 0) {
         printf("pigpio cannot initialise gpio\nRestart Program\n");
         exit(EXIT_FAILURE);
     }
-    int recycleDist;
+    int sensor1Dist, sensor2Dist, sensor3Dist;
     for (;;) {
-        recycleDist = calculateDistance(21, 20);
-        printf("Recycle Distance = %d\n", recycleDist);
+        sensor1Dist = calculateDistance(trigger, sensor1Echo);
+	sensor2Dist = calculateDistance(trigger, sensor2Echo);
+	sensor3Dist = calculateDistance(trigger, sensor3Echo);
+
+	
+        printf("Sensor 1 Distance = %d\nSensor 2 Distance: %d\nSensor 3 Distance: %d\n", sensor1Dist, sensor2Dist, sensor3Dist);
         time_sleep(1);
     }
     
@@ -41,8 +50,11 @@ int initSensors(void)
     if (gpioInitialise() < 0) {
         return 0;
     }
-    gpioSetMode(21, PI_OUTPUT); // Trigger
-    gpioSetMode(20, PI_INPUT);  // Echo
+    gpioSetMode(trigger, PI_OUTPUT); // Trigger
+    gpioSetMode(sensor1Echo, PI_INPUT); 
+    gpioSetMode(sensor2Echo, PI_INPUT); 
+    gpioSetMode(sensor3Echo, PI_INPUT);
+
     // settle trigger pin
     gpioWrite(21, 0);
     return 1;
