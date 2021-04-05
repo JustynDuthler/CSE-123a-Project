@@ -30,12 +30,14 @@ def main():
     # index.
     camera = cv2.VideoCapture(0)
 
-    
+    img_height = 224
+    img_width = 224
+
     while (cv2.waitKey(1) & 0xFF) == 0xFF:
         # Get an image from the camera.
         image = get_image_from_camera(camera)
 
-        
+        resized_img = cv2.resize(image, (img_height, img_width))
 
         # Display the image
         cv2.imshow("SimpleSort", image)
