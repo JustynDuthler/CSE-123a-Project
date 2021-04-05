@@ -42,6 +42,24 @@ def main():
         # Display the image
         cv2.imshow("SimpleSort", image)
 
+        X = np.array(resized_img)
+        X = X / 255
+
+        # increases dimension by 1
+        X = tf.expand_dims(X, 0) # Create a batch
+        print(X.shape)
+
+        model = tf.keras.models.load_model('saved-model/model')
+
+        prediction = model.predict(X)
+        score = tf.nn.softmax(prediction[0])
+
+        class_names = ["cardboard", "compost", "glass", "metal", "paper", "plastic", "trash"]
+
+        print(
+            "This image most likely belongs to {} with a {:.2f} percent confidence."
+            .format(class_names[np.argmax(score)], 100 * np.max(score))
+        )
    
 
 if __name__ == "__main__":
