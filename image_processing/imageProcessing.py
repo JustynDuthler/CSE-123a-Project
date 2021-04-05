@@ -4,11 +4,7 @@
 import time
 import cv2
 
-# Import helper functions
-import tutorial_helpers as helpers
 
-# Import the Python wrapper for the ELL model
-import model
 
 
 def get_image_from_camera(camera):
