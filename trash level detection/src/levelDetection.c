@@ -23,11 +23,14 @@
 #define trigger     21
 #define sensor1Echo 20
 #define sensor2Echo 16
-#define sensor3Echo 26
+#define sensor3Echo 25
+#define led1Pin	    13
+#define led2Pin     19
+#define led3Pin     26
 
 int main() 
 {
-    if (initSensors() == 0) {
+    if (initHardware() == 0) {
         printf("pigpio cannot initialise gpio\nRestart Program\n");
         exit(EXIT_FAILURE);
     }
@@ -37,24 +40,32 @@ int main()
 	sensor2Dist = calculateDistance(trigger, sensor2Echo);
 	sensor3Dist = calculateDistance(trigger, sensor3Echo);
 
-	
         printf("Sensor 1 Distance = %d\nSensor 2 Distance: %d\nSensor 3 Distance: %d\n", sensor1Dist, sensor2Dist, sensor3Dist);
-        time_sleep(1);
+	ledLogic(sensor1Dist, sensor2Dist, sensor3Dist);
+        time_sleep(2);
     }
     
     return EXIT_SUCCESS;
 }
 
-int initSensors(void)
+int initHardware(void)
 {
     if (gpioInitialise() < 0) {
         return 0;
     }
+    // init Sensor pins
     gpioSetMode(trigger, PI_OUTPUT); // Trigger
     gpioSetMode(sensor1Echo, PI_INPUT); 
     gpioSetMode(sensor2Echo, PI_INPUT); 
     gpioSetMode(sensor3Echo, PI_INPUT);
-
+    // init LED pin
+    gpioSetMode(led1Pin, PI_OUTPUT);
+    gpioSetMode(led2Pin, PI_OUTPUT);    
+    gpioSetMode(led3Pin, PI_OUTPUT);
+    // turn LEDs off (2 of the LEDs are common anode (2,3) 1 is not)
+    gpioWrite(led1Pin, 1);
+    gpioWrite(led2Pin, 1);
+    gpioWrite(led3Pin, 0);    
     // settle trigger pin
     gpioWrite(21, 0);
     return 1;
@@ -81,4 +92,16 @@ int calculateDistance(int trigPin, int echoPin)
     long timeDiff = stopTimeM - startTimeM;
     int distance = timeDiff / 58;
     return distance;
+}
+
+void ledLogic(int sensor1Dist, int sensor2Dist, int sensor3Dist) {
+    if (sensor1Dist < 15) {
+	gpioWrite(led1Pin, 0);	
+    } else { gpioWrite(led1Pin, 1); } 
+    if (sensor2Dist < 15) {
+        gpioWrite(led2Pin, 0);   
+    } else { gpioWrite(led2Pin, 1); }
+    if (sensor3Dist < 15) {
+        gpioWrite(led3Pin, 1); // not common anode, if using common anode change to 0
+    } else { gpioWrite(led3Pin, 0); }
 }
