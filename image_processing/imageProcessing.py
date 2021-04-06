@@ -33,7 +33,13 @@ def main():
     img_height = 224
     img_width = 224
 
-    #while (cv2.waitKey(1) & 0xFF) == 0xFF:
+
+    #show camera and prompt to take picture
+    while (cv2.waitKey(1) & 0xFF) == 0xFF:
+
+        image = get_image_from_camera(camera)
+        cv2.imshow("SimpleSort: press any key to take picture", image)
+
     # Get an image from the camera.
     image = get_image_from_camera(camera)
 
