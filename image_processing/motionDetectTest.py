@@ -37,6 +37,8 @@ def main():
     image2 = get_image_from_camera(camera)
     time.sleep(1)
 
+    threshold=25
+
     #show camera and prompt to take picture
     while (cv2.waitKey(1) & 0xFF) == 0xFF:
 
@@ -52,11 +54,11 @@ def main():
         (_, cnts, _) = cv2.findContours(thresholded.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         # return None, if no contours detected
-    	if len(cnts) == 0:
-        	print("no motion")
-    	else:
-        	#
-        	print("motion detected")
+        if len(cnts) == 0:
+            print("no motion")
+        else:
+            #
+            print("motion detected")
         	
         time.sleep(1)
 
