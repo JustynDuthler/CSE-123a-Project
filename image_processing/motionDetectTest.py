@@ -34,17 +34,33 @@ def main():
     # index.
     camera = cv2.VideoCapture(0)
 
-    image = get_image_from_camera(camera)
-
+    image2 = get_image_from_camera(camera)
+    time.sleep(1)
 
     #show camera and prompt to take picture
     while (cv2.waitKey(1) & 0xFF) == 0xFF:
 
-        image = get_image_from_camera(camera)
-        cv2.imshow("SimpleSort: press any key to take picture", image)
+        image1 = get_image_from_camera(camera)
+        
+        #find absolute difference
+        diff = cv2.absdiff(image1, image2);
 
+        #get threshold to get foreground
+        thresholded = cv2.threshold(diff, threshold, 255, cv2.THRESH_BINARY)[1]
 
+        #get contours
+        (_, cnts, _) = cv2.findContours(thresholded.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
+        # return None, if no contours detected
+    	if len(cnts) == 0:
+        	print("no motion")
+    	else:
+        	#
+        	print("motion detected")
+        	
+        time.sleep(1)
+
+        image2 = get_image_from_camera(camera)
     
    
 
