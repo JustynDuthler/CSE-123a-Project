@@ -35,6 +35,9 @@ def main():
     camera = cv2.VideoCapture(0)
 
     image2 = get_image_from_camera(camera)
+
+    cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
+
     time.sleep(1)
 
     threshold=25
@@ -43,6 +46,8 @@ def main():
     while (cv2.waitKey(1) & 0xFF) == 0xFF:
 
         image1 = get_image_from_camera(camera)
+
+        cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
         
         #find absolute difference
         diff = cv2.absdiff(image1, image2);
@@ -63,6 +68,8 @@ def main():
         time.sleep(1)
 
         image2 = get_image_from_camera(camera)
+
+        cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
     
    
 
