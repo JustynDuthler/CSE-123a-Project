@@ -13,6 +13,7 @@ import os
 import tensorflow as tf
 import cv2
 
+import pigpio
 
 
 def get_image_from_camera(camera):
@@ -26,6 +27,9 @@ def get_image_from_camera(camera):
 
 
 def main():
+
+    pi1 = pigpio.pi() #create instance of pigpio.pi class
+
     # Open the video camera. To use a different camera, change the camera
     # index.
     camera = cv2.VideoCapture(0)
