@@ -38,21 +38,23 @@ def main():
 
     #image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
 
+    image2 = cv2.resize(image2, (10, 10))
+
     time.sleep(1)
 
-    threshold=25
+    
 
     #show camera and prompt to take picture
     while (cv2.waitKey(1) & 0xFF) == 0xFF:
 
         image1 = get_image_from_camera(camera)
-
+        image1 = cv2.resize(image1, (10, 10))
         #image1 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
         
         difference = cv2.subtract(image1, image2)
         b, g, r = cv2.split(difference)
 
-        if cv2.countNonZero(b) == 0 and cv2.countNonZero(g) == 0 and cv2.countNonZero(r) == 0:
+        if cv2.countNonZero(b) < 50 and cv2.countNonZero(g) < 50 and cv2.countNonZero(r) < 50:
             print("motion not detected")
         else :
             print("motion detected")
@@ -61,7 +63,7 @@ def main():
         time.sleep(1)
 
         image2 = get_image_from_camera(camera)
-
+        image2 = cv2.resize(image2, (10, 10))
         #image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
     
    
