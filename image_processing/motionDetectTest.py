@@ -36,7 +36,7 @@ def main():
 
     image2 = get_image_from_camera(camera)
 
-    image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
+    #image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
 
     time.sleep(1)
 
@@ -47,29 +47,21 @@ def main():
 
         image1 = get_image_from_camera(camera)
 
-        image1 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
+        #image1 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
         
-        #find absolute difference
-        diff = cv2.absdiff(image1, image2);
+        difference = cv2.subtract(original, duplicate)
+        b, g, r = cv2.split(difference)
 
-        #get threshold to get foreground
-        thresholded = cv2.threshold(diff, threshold, 255, cv2.THRESH_BINARY)[1]
-
-        #get contours
-        (_, cnts, _) = cv2.findContours(thresholded.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-        # return None, if no contours detected
-        if len(cnts) == 0:
-            print("no motion")
-        else:
-            #
+        if cv2.countNonZero(b) == 0 and cv2.countNonZero(g) == 0 and cv2.countNonZero(r) == 0:
             print("motion detected")
+
+        
         	
         time.sleep(1)
 
         image2 = get_image_from_camera(camera)
 
-        image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
+        #image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
     
    
 
