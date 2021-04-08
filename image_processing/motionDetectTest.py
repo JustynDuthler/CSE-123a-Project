@@ -49,12 +49,13 @@ def main():
 
         #image1 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
         
-        difference = cv2.subtract(original, duplicate)
+        difference = cv2.subtract(image1, image2)
         b, g, r = cv2.split(difference)
 
         if cv2.countNonZero(b) == 0 and cv2.countNonZero(g) == 0 and cv2.countNonZero(r) == 0:
+            print("motion not detected")
+        else :
             print("motion detected")
-
         
         	
         time.sleep(1)
