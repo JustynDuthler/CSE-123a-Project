@@ -44,7 +44,7 @@ def main():
 
     
 
-    #show camera and prompt to take picture
+    
     while (cv2.waitKey(1) & 0xFF) == 0xFF:
 
         image1 = get_image_from_camera(camera)

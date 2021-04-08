@@ -3,3 +3,4 @@ This program runs very slowly so don't abort if it takes a minute after a key pr
 gpio:
  4 -> recycle, 5 -> compost, -> 4 & 5 -> trash
 motionDetectTest.py is still a work in progress, but ideally it should detect whether trash has been placed in front of the camera or not. Going forward this should replace the keyboard input input in imageProcessing.py
+when running python3 motionDetectTest.py the terminal will print either "motion detected" or "motion not detected" once a second if there is a change to what the camera is pointing at.
