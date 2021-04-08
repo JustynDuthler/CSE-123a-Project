@@ -71,6 +71,17 @@ def main():
         .format(class_names[np.argmax(score)], 100 * np.max(score))
     )
    
+    cat = np.argmax(score)
+
+    if cat == 0 or cat == 2 or cat == 3 or cat == 4 or cat == 5
+        print("recycle")
+
+    elif cat == 1
+        print("compost")
+
+    elif cat == 6
+        print("trash")
+        
 
 if __name__ == "__main__":
     main()
