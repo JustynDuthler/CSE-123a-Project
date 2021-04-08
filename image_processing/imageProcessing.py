@@ -29,6 +29,8 @@ def get_image_from_camera(camera):
 def main():
 
     pi1 = pigpio.pi() #create instance of pigpio.pi class
+    pi1.write(4, 0)
+    pi1.write(5, 0)
 
     # Open the video camera. To use a different camera, change the camera
     # index.
@@ -73,14 +75,18 @@ def main():
    
     cat = np.argmax(score)
 
-    if cat == 0 or cat == 2 or cat == 3 or cat == 4 or cat == 5
-        print("recycle")
+    if cat == 0 or cat == 2 or cat == 3 or cat == 4 or cat == 5:
+        print("recycle, gpio 4")
+        pi1.write(4, 1)
 
-    elif cat == 1
-        print("compost")
+    elif cat == 1:
+        print("compost, gpio 5")
+        pi1.write(5, 1)
 
-    elif cat == 6
-        print("trash")
+    elif cat == 6:
+        print("trash, gpio 4 & gpio 5")
+        pi1.write(4, 1)
+        pi1.write(5, 1)
         
 
 if __name__ == "__main__":
