@@ -14,13 +14,13 @@
 *********************************/
 
 /*********************************
- * int initSensors()
+ * int initHardware()
  * 
  * INPUTS:
  *  void
  * 
  * OUTPUTS:
- *  int initSensors: 1 if no issues 
+ *  int initHardware: 1 if no issues 
  *  initilizing sensors, 0 if any 
  *  issues occured
  * 
@@ -28,10 +28,11 @@
  *  This function initilizes the GPIO
  *  on the pi and sets up the trigger
  *  and echo pins for the 3 ultrasonic
- *  sensors
+ *  sensors and the LED pins. It sets
+ *  the LED values to initially off.
  * 
 *********************************/
-int initSensors(void);
+int initHardware(void);
 
 /*********************************
  * calculateDistance()
@@ -53,3 +54,24 @@ int initSensors(void);
  * 
 *********************************/
 int calculateDistance(int trigPin, int echoPin);
+
+/*********************************
+ * ledLogic()
+ * 
+ * INPUTS:
+ *  int sensor1Dist: measurement of sensor
+ *  1
+ *  int sensor2Dist: measurement of sensor
+ *  2
+ *  int sensor3Dist: measurement of sensor 
+ *  3
+ * OUTPUTS:
+ *  void
+ * 
+ * DESCRIPTION:
+ *  This function turns on the LEDs if the
+ *  corresponding measurement is less than 15cm
+ * 
+*********************************/
+void ledLogic(int sensor1Dist, int sensor2Dist, int sensor3Dist);
+
