@@ -78,6 +78,7 @@ int calculateDistance(int trigPin, int echoPin)
     gpioDelay(10);
     gpioWrite(trigPin, 0);
     // wait for echo pin to turn high
+    printf("Waiting on Pin: %d\n", echoPin);
     struct timeval startTime, stopTime;
     while (gpioRead(echoPin) != 1) {
         gettimeofday(&startTime, NULL); // update start time
