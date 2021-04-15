@@ -39,7 +39,7 @@ int main() {
 	gpioPWM(24, 500);
 	
 	for(;;){
-		printf("Enter t r or c:");
+		printf("Enter:\n't' for trash\n'r' for recycling\n'c' for compost\n'd' to lower the tray\n'u' to raise the tray\n");
 		c = getchar();
 		getchar();
 		
@@ -47,8 +47,8 @@ int main() {
 		if (c=='t'){
 			printf("trash pwm speed \n");
 			gpioDelay(1000000);
-			gpioPWM(23,500);
-			gpioPWM(24,1900);
+			gpioPWM(23,1100);  // was 500
+			gpioPWM(24,1300); // was 1900
 			gpioDelay(2000000);
 			gpioPWM(23,1900);
 			gpioPWM(24,500);
@@ -57,8 +57,8 @@ int main() {
 			printf("recycle pwm speed \n");
 			gpioPWM(25, 2388);
 			gpioDelay(1000000);
-			gpioPWM(23,500);
-			gpioPWM(24,1900);
+			gpioPWM(23,1100);
+			gpioPWM(24,1300);
 			gpioDelay(2000000);
 			gpioPWM(23,1900);
 			gpioPWM(24,500);
@@ -68,15 +68,24 @@ int main() {
 			printf("compost pwm speed \n");
 			gpioPWM(25, 612);
 			gpioDelay(1000000);
-			gpioPWM(23,500);
-			gpioPWM(24,1900);
+			gpioPWM(23,1100);
+			gpioPWM(24,1300);
 			gpioDelay(2000000);
 			gpioPWM(23,1900);
 			gpioPWM(24,500);
 			gpioDelay(1000000);
-			gpioPWM(25, 1500);
-			
+			gpioPWM(25, 1500);	
+		}if (c=='d'){
+			printf("lower tray mode\n");
+			gpioPWM(23,1100);
+			gpioPWM(24,1300);
+			gpioDelay(2000000);
+		}if (c=='u'){
+			printf("raise tray mode\n");
+			gpioPWM(23,1900);
+			gpioPWM(24,500);
 		}
+		
 		c='n';
 	}
     
