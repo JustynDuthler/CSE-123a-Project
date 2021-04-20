@@ -36,7 +36,7 @@ def main():
 
     image2 = get_image_from_camera(camera)
 
-    #image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
+    
 
     image2 = cv2.resize(image2, (10, 10))
 
@@ -49,7 +49,7 @@ def main():
 
         image1 = get_image_from_camera(camera)
         image1 = cv2.resize(image1, (10, 10))
-        #image1 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
+        
         
         difference = cv2.subtract(image1, image2)
         b, g, r = cv2.split(difference)
@@ -58,13 +58,15 @@ def main():
             print("motion not detected")
         else :
             print("motion detected")
+            os.system("python3 imageProcessing.py")
+
         
         	
         time.sleep(1)
 
         image2 = get_image_from_camera(camera)
         image2 = cv2.resize(image2, (10, 10))
-        #image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
+        
     
    
 
