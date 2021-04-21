@@ -15,28 +15,32 @@
 #include <pigpio.h>
 #include <unistd.h>
 
+#define topServo 17
+#define leftServo 27
+#define rightServo 22
+
 int main() {
 
    
     if (gpioInitialise() < 0) {
         exit(EXIT_FAILURE);
     }
-    gpioSetMode(25, PI_OUTPUT);
-    gpioSetMode(23, PI_OUTPUT);
-    gpioSetMode(24, PI_OUTPUT);
+    gpioSetMode(topServo, PI_OUTPUT); 
+    gpioSetMode(leftServo, PI_OUTPUT); 
+    gpioSetMode(rightServo, PI_OUTPUT); 
     char c;
-    gpioSetPWMfrequency(25,50);
-	gpioSetPWMrange(25,20000);
+    gpioSetPWMfrequency(topServo,50);
+	gpioSetPWMrange(topServo,20000);
 		
-	gpioSetPWMfrequency(23,50);
-	gpioSetPWMrange(23,20000);
+	gpioSetPWMfrequency(leftServo,50);
+	gpioSetPWMrange(leftServo,20000);
 	
-	gpioSetPWMfrequency(24,50);
-	gpioSetPWMrange(24,20000);
+	gpioSetPWMfrequency(rightServo,50);
+	gpioSetPWMrange(rightServo,20000);
 	
-	gpioPWM(25, 1500);
-	gpioPWM(23, 1900);
-	gpioPWM(24, 500);
+	gpioPWM(topServo, 1500);
+	gpioPWM(leftServo, 1900);
+	gpioPWM(rightServo, 500);
 	
 	for(;;){
 		printf("Enter:\n't' for trash\n'r' for recycling\n'c' for compost\n'd' to lower the tray\n'u' to raise the tray\n");
@@ -47,43 +51,43 @@ int main() {
 		if (c=='t'){
 			printf("trash pwm speed \n");
 			gpioDelay(1000000);
-			gpioPWM(23,1100);  // was 500
-			gpioPWM(24,1300); // was 1900
+			gpioPWM(leftServo,1100);  // was 500
+			gpioPWM(rightServo,1300); // was 1900
 			gpioDelay(2000000);
-			gpioPWM(23,1900);
-			gpioPWM(24,500);
+			gpioPWM(leftServo,1900);
+			gpioPWM(rightServo,500);
 			gpioDelay(1000000);	
 		}if (c=='r'){
 			printf("recycle pwm speed \n");
-			gpioPWM(25, 2388);
+			gpioPWM(topServo, 2388);
 			gpioDelay(1000000);
-			gpioPWM(23,1100);
-			gpioPWM(24,1300);
+			gpioPWM(leftServo,1100);
+			gpioPWM(rightServo,1300);
 			gpioDelay(2000000);
-			gpioPWM(23,1900);
-			gpioPWM(24,500);
+			gpioPWM(leftServo,1900);
+			gpioPWM(rightServo,500);
 			gpioDelay(1000000);
-			gpioPWM(25, 1500);
+			gpioPWM(topServo, 1500);
 		}if (c=='c'){
 			printf("compost pwm speed \n");
-			gpioPWM(25, 612);
+			gpioPWM(topServo, 612);
 			gpioDelay(1000000);
-			gpioPWM(23,1100);
-			gpioPWM(24,1300);
+			gpioPWM(leftServo,1100);
+			gpioPWM(rightServo,1300);
 			gpioDelay(2000000);
-			gpioPWM(23,1900);
-			gpioPWM(24,500);
+			gpioPWM(leftServo,1900);
+			gpioPWM(rightServo,500);
 			gpioDelay(1000000);
-			gpioPWM(25, 1500);	
+			gpioPWM(topServo, 1500);	
 		}if (c=='d'){
 			printf("lower tray mode\n");
-			gpioPWM(23,1100);
-			gpioPWM(24,1300);
+			gpioPWM(leftServo,1100);
+			gpioPWM(rightServo,1300);
 			gpioDelay(2000000);
 		}if (c=='u'){
 			printf("raise tray mode\n");
-			gpioPWM(23,1900);
-			gpioPWM(24,500);
+			gpioPWM(leftServo,1900);
+			gpioPWM(rightServo,500);
 		}
 		
 		c='n';
