@@ -83,7 +83,7 @@ def main():
         resized_img = cv2.resize(image, (img_height, img_width))
 
         # Display the image
-        cv2.imshow("SimpleSort", image)
+        #cv2.imshow("SimpleSort", image)
 
         X = np.array(resized_img)
         X = X / 255
