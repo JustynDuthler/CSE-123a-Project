@@ -18,6 +18,7 @@
 #define topServo 17
 #define leftServo 22
 #define rightServo 27
+// Orientation based on tray in the front, rod in the middle, and servos in the back
 
 int main() {
 
