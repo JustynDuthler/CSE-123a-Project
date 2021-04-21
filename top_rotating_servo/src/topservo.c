@@ -16,8 +16,8 @@
 #include <unistd.h>
 
 #define topServo 17
-#define leftServo 27
-#define rightServo 22
+#define leftServo 22
+#define rightServo 27
 
 int main() {
 
