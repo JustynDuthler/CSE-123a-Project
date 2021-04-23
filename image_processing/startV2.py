@@ -53,7 +53,7 @@ def main():
         motion = 0
 
     
-        while (cv2.waitKey(1) & 0xFF) == 0xFF and motion == 0:
+        while (cv2.waitKey(1) & 0xFF) == 0xFF and motion < 3:
 
             image1 = get_image_from_camera(camera)
             image1 = cv2.resize(image1, (10, 10))
@@ -62,12 +62,12 @@ def main():
             difference = cv2.subtract(image1, image2)
             b, g, r = cv2.split(difference)
 
-            if cv2.countNonZero(b) < 50 and cv2.countNonZero(g) < 50 and cv2.countNonZero(r) < 50:
+            if cv2.countNonZero(b) < 60 and cv2.countNonZero(g) < 60 and cv2.countNonZero(r) < 60:
                 print("motion not detected")
                 motion = 0
             else :
                 print("motion detected")
-                motion = 1
+                motion = motion + 1
 
         
         	
