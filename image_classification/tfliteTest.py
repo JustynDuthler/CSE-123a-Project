@@ -61,4 +61,6 @@ for file in pathlib.Path(folder_path).iterdir():
     # output_details[0]['index'] = the index which provides the input
     output_data = interpreter.get_tensor(output_details[0]['index'])
     
+    # this would hypothetically show 7 numbers representing each class and the highest number
+    # is the classification result
     print("For file {}, the output is {}".format(file.stem, output_data))
