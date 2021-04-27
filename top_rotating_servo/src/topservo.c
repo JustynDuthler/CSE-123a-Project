@@ -40,8 +40,8 @@ int main() {
 	gpioSetPWMrange(rightServo,20000);
 	
 	gpioPWM(topServo, 1500);
-	gpioPWM(leftServo, 1900);
-	gpioPWM(rightServo, 500);
+	gpioPWM(leftServo, 1100);
+	gpioPWM(rightServo, 1300);
 	
 	for(;;){
 		printf("Enter:\n't' for trash\n'r' for recycling\n'c' for compost\n'd' to lower the tray\n'u' to raise the tray\n");
@@ -52,43 +52,43 @@ int main() {
 		if (c=='t'){
 			printf("trash pwm speed \n");
 			gpioDelay(1000000);
-			gpioPWM(leftServo,1100);  // was 500
-			gpioPWM(rightServo,1300); // was 1900
+			gpioPWM(leftServo,1900);  // was 500
+			gpioPWM(rightServo,500); // was 1900
 			gpioDelay(2000000);
-			gpioPWM(leftServo,1900);
-			gpioPWM(rightServo,500);
+			gpioPWM(leftServo,1100);
+			gpioPWM(rightServo,1300);
 			gpioDelay(1000000);	
 		}if (c=='r'){
 			printf("recycle pwm speed \n");
 			gpioPWM(topServo, 2388);
 			gpioDelay(1000000);
-			gpioPWM(leftServo,1100);
-			gpioPWM(rightServo,1300);
-			gpioDelay(2000000);
 			gpioPWM(leftServo,1900);
 			gpioPWM(rightServo,500);
+			gpioDelay(2000000);
+			gpioPWM(leftServo,1100);
+			gpioPWM(rightServo,1300);
 			gpioDelay(1000000);
 			gpioPWM(topServo, 1500);
 		}if (c=='c'){
 			printf("compost pwm speed \n");
 			gpioPWM(topServo, 612);
 			gpioDelay(1000000);
-			gpioPWM(leftServo,1100);
-			gpioPWM(rightServo,1300);
-			gpioDelay(2000000);
 			gpioPWM(leftServo,1900);
 			gpioPWM(rightServo,500);
+			gpioDelay(2000000);
+			gpioPWM(leftServo,1100);
+			gpioPWM(rightServo,1300);
 			gpioDelay(1000000);
 			gpioPWM(topServo, 1500);	
 		}if (c=='d'){
 			printf("lower tray mode\n");
-			gpioPWM(leftServo,1100);
-			gpioPWM(rightServo,1300);
+			gpioPWM(leftServo,1900);
+			gpioPWM(rightServo,500);
 			gpioDelay(2000000);
 		}if (c=='u'){
 			printf("raise tray mode\n");
-			gpioPWM(leftServo,1900);
-			gpioPWM(rightServo,500);
+			gpioPWM(leftServo,1100);
+			gpioPWM(rightServo,1300);
 		}
 		
 		c='n';
