@@ -42,6 +42,7 @@ int main() {
 	gpioSetPWMfrequency(rightServo,50);
 	gpioSetPWMrange(rightServo,20000);
 	
+	
 	gpioPWM(topServo, 1500);
 	gpioPWM(leftServo, 1900);
 	gpioPWM(rightServo, 500);
