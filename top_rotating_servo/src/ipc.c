@@ -49,11 +49,11 @@ int main() {
 	
 	for(;;){
 		if(gpioRead(ipc_four)==0 && gpioRead(ipc_five)==1){
-			c='t';
+			c='c';
 		}else if(gpioRead(ipc_four)==1 && gpioRead(ipc_five)==0){
 			c='r';
 		}else if(gpioRead(ipc_four)==1 && gpioRead(ipc_five)==1){
-			c='c';
+			c='t';
 		}
 		
 		
