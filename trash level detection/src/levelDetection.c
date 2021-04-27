@@ -28,26 +28,6 @@
 #define led2Pin     19
 #define led3Pin     26
 
-int main() 
-{
-    if (initHardware() == 0) {
-        printf("pigpio cannot initialise gpio\nRestart Program\n");
-        exit(EXIT_FAILURE);
-    }
-    int sensor1Dist, sensor2Dist, sensor3Dist;
-    for (;;) {
-        sensor1Dist = calculateDistance(trigger, sensor1Echo);
-	sensor2Dist = calculateDistance(trigger, sensor2Echo);
-	sensor3Dist = calculateDistance(trigger, sensor3Echo);
-
-        printf("Sensor 1 Distance = %d\nSensor 2 Distance: %d\nSensor 3 Distance: %d\n", sensor1Dist, sensor2Dist, sensor3Dist);
-	ledLogic(sensor1Dist, sensor2Dist, sensor3Dist);
-        time_sleep(2);
-    }
-    
-    return EXIT_SUCCESS;
-}
-
 int initHardware(void)
 {
     if (gpioInitialise() < 0) {
