@@ -65,13 +65,21 @@ int calculateDistance(int trigPin, int echoPin)
 }
 
 void ledLogic(int sensorDist, char compartment) {
-    if (sensorDist < 15) {
+    if (sensorDist < 20) { // turn on led
         if (compartment == 't') {
 	    gpioWrite(led1Pin, 0);
 	} else if (compartment == 'r') {
 	    gpioWrite(led2Pin, 0);
 	} else {
             gpioWrite(led3Pin, 1); // not common anode, if using command anode change to 1
+	}
+    } else { // turn off led 
+        if (compartment == 't') {
+	    gpioWrite(led1Pin, 1);
+	} else if (compartment == 'r') {
+	    gpioWrite(led2Pin, 1);
+	} else {
+            gpioWrite(led3Pin, 0); // not common anode, if using command anode change to 1
 	}
     }
 }
