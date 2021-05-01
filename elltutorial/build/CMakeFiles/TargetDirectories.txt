@@ -1,5 +1,0 @@
-/home/pi/School/GarbageProject/CSE-123a-Project/elltutorial/build/CMakeFiles/rebuild_cache.dir
-/home/pi/School/GarbageProject/CSE-123a-Project/elltutorial/build/CMakeFiles/tutorial.dir
-/home/pi/School/GarbageProject/CSE-123a-Project/elltutorial/build/CMakeFiles/edit_cache.dir
-/home/pi/School/GarbageProject/CSE-123a-Project/elltutorial/build/model/CMakeFiles/rebuild_cache.dir
-/home/pi/School/GarbageProject/CSE-123a-Project/elltutorial/build/model/CMakeFiles/edit_cache.dir
