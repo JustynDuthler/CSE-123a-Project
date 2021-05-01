@@ -14,6 +14,7 @@ import tensorflow as tf
 import cv2
 
 import gpiozero
+from gpiozero import LED
 
 
 def get_image_from_camera(camera):
