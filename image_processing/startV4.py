@@ -55,7 +55,7 @@ def main():
         motion = 0
 
     
-        while (cv2.waitKey(1) & 0xFF) == 0xFF and motion < 3:
+        while (cv2.waitKey(1) & 0xFF) == 0xFF and motion < 6:
 
             image1 = get_image_from_camera(camera)
             image1 = cv2.resize(image1, (10, 10))
@@ -128,9 +128,9 @@ def main():
             pin5.on()
             time.sleep(2)
     
-    #wait for sorting to finish
-    print("waiting for sorting to finish")    
-    time.sleep(2)
+        #wait for sorting to finish
+        print("waiting for sorting to finish")    
+        time.sleep(2)
    
 
 if __name__ == "__main__":
