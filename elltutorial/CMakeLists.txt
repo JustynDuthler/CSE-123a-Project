@@ -3,7 +3,7 @@ project(tutorial)
 set(CMAKE_CXX_STANDARD 11)
 
 # Change this to set OpenCV_DIR to your opencv/build location
-set(OpenCV_DIR C:/Install/OpenCV3/opencv/build)
+set(OpenCV_DIR /home/pi/opencv/build)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 

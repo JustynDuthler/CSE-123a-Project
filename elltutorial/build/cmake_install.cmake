@@ -1,4 +1,4 @@
-# Install script for directory: /home/pi/elltutorial
+# Install script for directory: /home/pi/School/GarbageProject/CSE-123a-Project/elltutorial
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/pi/elltutorial/build/model/cmake_install.cmake")
+  include("/home/pi/School/GarbageProject/CSE-123a-Project/elltutorial/build/model/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/pi/elltutorial/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/pi/School/GarbageProject/CSE-123a-Project/elltutorial/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

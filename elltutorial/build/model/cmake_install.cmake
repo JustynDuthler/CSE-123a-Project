@@ -1,4 +1,4 @@
-# Install script for directory: /home/pi/elltutorial/model
+# Install script for directory: /home/pi/School/GarbageProject/CSE-123a-Project/elltutorial/model
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
