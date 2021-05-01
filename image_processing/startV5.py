@@ -16,6 +16,8 @@ import cv2
 import gpiozero
 from gpiozero import LED
 from gpiozero import Button
+from gpiozero import DistanceSensor
+from time import sleep
 
 
 def get_image_from_camera(camera):
@@ -27,41 +29,18 @@ def get_image_from_camera(camera):
         return frame
     return None
 
-trigger = LED(18)
-echo = Button(23)
 
-
-def distance():
-    # set trigger
-    trigger.on()
- 
-    # set trigger for 10 us
-    time.sleep(0.00001)
-    trigger.off()
- 
-    start = time.time()
-    stop = time.time()
- 
-    # start timer
-    while not echo.is_pressed:
-        start = time.time()
- 
-    # stop timer
-    while echo.is_pressed:
-        stop = time.time()
- 
-    # elapsed time
-    elapsedtime = stop - start
-    # distance in cm
-    distance = elapsedtime / 58
- 
-    return distance
+def distance(sensor):
+    # call Distance sensor class to get distance
+    return sensor.distance * 100;
 
 def main():
+    
+    sensor = DistanceSensor(echo=23, trigger=18);
 
     pin4 = LED(4)
     pin5 = LED(5)
-
+    
     # Open the video camera. To use a different camera, change the camera
     # index.
     camera = cv2.VideoCapture(0)
@@ -81,12 +60,14 @@ def main():
 
         while True:
 
-            dist = distance();
+            dist = distance(sensor);
 
             if dist < 13:
+                # sleep 2 seconds to allow user to remove hand
+                time.sleep(2) 
                 break
 
-            time.sleep(0.06)
+            time.sleep(1)
 
         print("trash detected")    
 
@@ -142,7 +123,7 @@ def main():
     
         #wait for sorting to finish
         print("waiting for sorting to finish")    
-        time.sleep(2)
+        time.sleep(4)
    
 
 if __name__ == "__main__":
