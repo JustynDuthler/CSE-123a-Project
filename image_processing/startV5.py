@@ -28,7 +28,7 @@ def get_image_from_camera(camera):
     return None
 
 trigger = LED(18)
-echo = BUTTON(23)
+echo = Button(23)
 
 
 def distance():
@@ -51,9 +51,9 @@ def distance():
         stop = time.time()
  
     # elapsed time
-    time = stop - start
+    elapsedtime = stop - start
     # distance in cm
-    distance = time / 58
+    distance = elapsedtime / 58
  
     return distance
 
@@ -75,13 +75,16 @@ def main():
         img_width = 224
 
         #detect object within 13 cm
-        distance = distance()
+        #dist = distance()
 
         print("waiting for trash")
 
-        while distance > 13:
+        while True:
 
-            distance = distance();
+            dist = distance();
+
+            if dist < 13:
+                break
 
             time.sleep(0.06)
 
