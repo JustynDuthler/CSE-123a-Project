@@ -92,8 +92,7 @@ def main():
 
         resized_img = cv2.resize(image, (img_height, img_width))
 
-        # display the image
-        cv2.imshow("SimpleSort", image)
+        
 
         resized_img = np.asarray(resized_img, dtype='float32')
         resized_img /= 255.0
