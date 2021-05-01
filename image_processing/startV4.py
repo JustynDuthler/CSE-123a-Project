@@ -55,7 +55,7 @@ def main():
         motion = 0
 
     
-        while (cv2.waitKey(1) & 0xFF) == 0xFF and motion < 6:
+        while (cv2.waitKey(1) & 0xFF) == 0xFF and motion < 5:
 
             image1 = get_image_from_camera(camera)
             image1 = cv2.resize(image1, (10, 10))

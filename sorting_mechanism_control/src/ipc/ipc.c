@@ -100,7 +100,7 @@ int main() {
 			gpioPWM(leftServo,1100);
 			gpioPWM(rightServo,1300);
 		}
-		
+		gpioDelay(2000000); /* delay 2 seconds so image processing can reset the gpio pins */		
 		c='n';
 	}
     
