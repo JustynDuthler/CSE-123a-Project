@@ -43,10 +43,11 @@ def main():
     
     # Open the video camera. To use a different camera, change the camera
     # index.
-    camera = cv2.VideoCapture(0)
+
 
     while True: 
-        
+        camera = cv2.VideoCapture(0)
+
         pin4.off()
         pin5.off()
 
@@ -65,7 +66,7 @@ def main():
             if dist < 13:
                 print("item detected")
                 # sleep 2 seconds to allow user to remove hand
-                time.sleep(2) 
+                time.sleep(5) 
                 break
 
             time.sleep(1)
@@ -75,7 +76,7 @@ def main():
 
         # Get an image from the camera.
         image = get_image_from_camera(camera)
-
+    
         # taken from tfliteTest
         interpreter = tf.lite.Interpreter(model_path="model.tflite")
 
@@ -123,7 +124,8 @@ def main():
             time.sleep(2)
     
         #wait for sorting to finish
-        print("waiting for sorting to finish")    
+        print("waiting for sorting to finish")
+        camera.release()
         time.sleep(4)
    
 
