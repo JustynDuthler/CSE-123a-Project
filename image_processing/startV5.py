@@ -56,20 +56,21 @@ def main():
         #detect object within 13 cm
         #dist = distance()
 
-        print("waiting for trash")
+        print("waiting for item")
 
         while True:
 
             dist = distance(sensor);
 
             if dist < 13:
+                print("item detected")
                 # sleep 2 seconds to allow user to remove hand
                 time.sleep(2) 
                 break
 
             time.sleep(1)
 
-        print("trash detected")    
+            
 
 
         # Get an image from the camera.
@@ -105,18 +106,18 @@ def main():
         num = np.argmax(output_data)
     
         if num == 0 or num == 2 or num == 3 or num == 4 or num == 5 or num == 5:
-            print("recycle, gpio 4")
+            print("RECYCLE, gpio 4")
             pin4.on()
             pin5.off()
             time.sleep(2)
 
         elif num == 1:
-            print("compost, gpio5")
+            print("COMPOST, gpio5")
             pin4.off()
             pin5.on()
             time.sleep(2)
         elif num == 6:
-            print("trash, gpio 4 & gpio 5")
+            print("TRASH, gpio 4 & gpio 5")
             pin4.on()
             pin5.on()
             time.sleep(2)
