@@ -44,9 +44,11 @@ def main():
         img_height = 224
         img_width = 224
 
+        #camera = cv2.VideoCapture(0)
+
         image2 = get_image_from_camera(camera)
 
-    
+        
 
         image2 = cv2.resize(image2, (10, 10))
 
@@ -55,7 +57,7 @@ def main():
         motion = 0
 
     
-        while (cv2.waitKey(1) & 0xFF) == 0xFF and motion < 5:
+        while (cv2.waitKey(1) & 0xFF) == 0xFF and motion < 4:
 
             image1 = get_image_from_camera(camera)
             image1 = cv2.resize(image1, (10, 10))
