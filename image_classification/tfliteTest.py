@@ -33,7 +33,7 @@ for file in pathlib.Path(folder_path).iterdir():
     new_img /= 255.0
     tf.shape(tf.squeeze(new_img))
 
-    print(new_img.shape)
+    # print(new_img.shape)
 
     # input_details[0]['index'] = the index which accepts the input
     interpreter.set_tensor(input_details[0]['index'], [new_img])
@@ -47,3 +47,6 @@ for file in pathlib.Path(folder_path).iterdir():
     # this prints 7 numbers and the highest one is the classification result
     # order of numbers: cardboard, compost, glass, metal, paper, plastic, trash
     print("For file {}, the output is {}".format(file.stem, output_data))
+
+    max = np.max(score)
+    print(max)
